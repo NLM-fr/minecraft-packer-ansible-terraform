@@ -34,12 +34,12 @@ provisioner "remote-exec" {
     connection {
       type        = "ssh"
       user        = "${var.ssh_user}"
-      private_key = "${file(".ssh/id_rsa")}"
+      private_key = "${file(var.ssh_key_private)}"
       host        = "${scaleway_instance_ip.public_ip.address}"
     }
   }
   provisioner "local-exec" {
-    command = "ansible-playbook  -i ${scaleway_instance_ip.public_ip.address}, --private-key ${var.private_key_path} minecraft.yaml"
+    command = "ansible-playbook  -i ${scaleway_instance_ip.public_ip.address}, --private-key ${var.ssh_key_private} minecraft.yaml"
   }
 }
 
