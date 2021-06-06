@@ -1,0 +1,13 @@
+---
+- name: Upgrade all packages to the latest version
+  apt:
+    update_cache: yes
+    cache_valid_time: 86400
+    upgrade: yes   
+
+- name: install Java
+  apt: 
+    name: openjdk-8-jdk
+    state: present
+    update_cache: yes  
+  become: yes  
