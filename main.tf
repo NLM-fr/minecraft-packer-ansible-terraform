@@ -19,6 +19,11 @@ resource "scaleway_instance_volume" "data" {
   type = "l_ssd"
 }
 
+resource "scaleway_account_ssh_key" "main" {
+    name        = "main"
+    public_key = "${file(var.public_key_path)}"
+}  
+
 resource "scaleway_instance_server" "my-instance" {
   type  = "DEV1-S"
   image = "ubuntu_focal"
@@ -27,7 +32,8 @@ resource "scaleway_instance_server" "my-instance" {
   tags = [ "minecraft instance" ]
   
   ip_id = scaleway_instance_ip.public_ip.id
-  
+
+
 provisioner "remote-exec" {
     inline = ["echo 'Wait until SSH is ready'"]
 
@@ -39,11 +45,7 @@ provisioner "remote-exec" {
     }
   }
   provisioner "local-exec" {
-    command = "ansible-playbook  -i ${scaleway_instance_ip.public_ip.address}, --private-key ${var.private_key_path} minecraft.yaml"
+    command = "ansible-playbook -u root -i ${scaleway_instance_ip.public_ip.address}, --private-key ${var.private_key_path} minecraft.yaml"
   }
-}
-
-output "public_ip" {
-  value = scaleway_instance_ip.public_ip.address
 }
 
