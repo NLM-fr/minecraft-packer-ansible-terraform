@@ -19,10 +19,10 @@ data "scaleway_instance_image" "ubuntu-minecraft-server" {
   name         = "ubuntu-minecraft-server"
 }
 
-resource "scaleway_account_ssh_key" "mc-launch-from-image" {
-    name        = "mc-launch-from-image"
-    public_key = "${file(var.public_key_path)}"
-}  
+#resource "scaleway_account_ssh_key" "mc-launch-from-image" {
+#    name        = "mc-launch-from-image"
+#    public_key = "${file(var.public_key_path)}"
+#}  
 
 resource "scaleway_instance_server" "ubuntu-minecraft-server" {
   name  = "minecraft-server01"
@@ -32,7 +32,11 @@ resource "scaleway_instance_server" "ubuntu-minecraft-server" {
   security_group_id = scaleway_instance_security_group.web.id
 
   provisioner "remote-exec" {
-    inline = ["echo 'Wait until SSH is ready'"]
+    inline = [
+      "echo 'SSH has been established'",
+      "echo 'starting minecraft server'",
+      "systemctl start minecraft-server",
+    ]
 
     connection {
       type        = "ssh"
