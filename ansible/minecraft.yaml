@@ -41,5 +41,4 @@
 
     - name: run the server 
       systemd: name=minecraft-server state=started
-
       
