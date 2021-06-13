@@ -13,7 +13,7 @@ This will run the packer.json file and create an image of the instance
 
 Terraform:
 
-terraform init 
+terraform init
 terraform plan
 terraform apply
 
