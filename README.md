@@ -13,6 +13,15 @@ This project is using scaleway cloud service to create an instance with a runnin
 We use Packer to create an image of our instance that runs the ansible list of commands.
 Then we use Terraform to create an instance with the previously created image and runs the minecraft server
 
+## Deployment:
+Create environment variables with API keys for packer and terraform:
+```
+# for packer
+export SCW_DEFAULT_PROJECT_ID=<your organization id>
+export SCALEWAY_API_TOKEN=<your scaleway api token>
+export SCW_ACCESS_KEY=<your scaleway api token>
+export SCW_SECRET_KEY=<your scaleway secret key>
+```
 ## Packer:
 
 This will run the packer.json file and create an image of the instance.
