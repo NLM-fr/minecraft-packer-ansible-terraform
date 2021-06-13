@@ -66,4 +66,5 @@ nmap -p 25565 localhost                         #Check for the default Minecraft
 ```
 ## Author Information:
 
-NLM-fr, nmougel4@gmail.com
+NLM-fr
+Contact: [nmougel4@gmail.com](mailto:nmougel4@gmail.com)
