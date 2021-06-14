@@ -1,0 +1,19 @@
+# /etc/systemd/system/minecraft-server.service
+[Unit]
+Description=Minecraft Server
+After=network.target
+
+[Service]
+WorkingDirectory=/root/
+
+Restart=always
+
+ExecStart=/usr/bin/java -Xms1G -Xmx1G -jar server.jar --nogui
+
+ExecStop=-p 0 -S mc -X eval 'stuff "say SERVER SHUTTING DOWN IN 5 SECONDS. SAVING ALL MAPS..."\015'
+ExecStop=/bin/sleep 5
+ExecStop=-p 0 -S mc -X eval 'stuff "save-all"\015'
+ExecStop=-p 0 -S mc -X eval 'stuff "stop"\015'
+
+[Install]
+WantedBy=multi-user.target
