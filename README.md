@@ -43,7 +43,9 @@ cd ../packers/
 packer build packer.json. 
 ```
 
+### Ansible:
 
+Make sure the ```minecraft-server.service``` file is in the same directory then what is written line 35 of the ``` /ansible/minecraft.yaml ``` file 
 
 ### Terraform:
 
